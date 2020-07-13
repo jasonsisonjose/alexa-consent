@@ -1,5 +1,5 @@
 # Alexa Gadgets - Ignoring Alexa commands with wake word detection
-> **WARNING**: NOT TESTED WITH WINDOWS 10
+> **WARNING**: NOT TESTED WITH WINDOWS 10 OR MAC (MAC has a better chance of working though as it is linux-based)
 
 Create and Utilize an Alexa Gadget using a Raspberry Pi (preferred, can use a linux machine), Python, and the [Alexa Gadgets Toolkit](https://developer.amazon.com/alexa/alexa-gadgets).
 
