@@ -168,7 +168,7 @@ To test out if you are able to connect to your amazon echo dot, run this command
 ./alexa_remote_control -a
 ```
 
-> **NOTE** If you experience a login error, a known workaround is to install a [cookies] (https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg?hl=en) extension and to manually login in to pitangui.amazon.com
+> **NOTE** If you experience a login error, a known workaround is to install a [cookies](https://chrome.google.com/webstore/detail/cookiestxt/njabckikapfpffapmjgojcnbfjonfjfg?hl=en) extension and to manually login in to pitangui.amazon.com
 
 After manually logging in, copy the cookies from the cookies.txt extension
 
