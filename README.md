@@ -208,12 +208,15 @@ for e.g. for the Wake word example, the name of the configuration file should be
 
 In order for a gadget you create to function, it will need to be paired to a [compatible Echo device](https://developer.amazon.com/docs/alexa-gadgets-toolkit/overview-bluetooth-gadgets.html#device-bluetooth-support). When running any example, make sure that the Echo device you want to pair to is nearby, and you have access to the Alexa app. The Echo devices that support gadgets are listed in the [Alexa Gadgets Toolkit documentation](https://developer.amazon.com/docs/alexa-gadgets-toolkit/understand-alexa-gadgets-toolkit.html#devices).
 
-If your gadget has never been paired before or if you switched the transport mode, it will go into pairing mode when you run your gadget's Python code. Following are the steps to pair your gadget using the Kitchen Sink example:
-- On your Pi, inside the `Alexa-Gadgets-Raspberry-Pi-Samples`, run the kitchen sink example using the launch script as follows:
+If your gadget has never been paired before or if you switched the transport mode, it will go into pairing mode when you run your gadget's Python code. Following are the steps to pair your gadget using the Wake Word project example:
+- On your Pi, inside the `alexa-consent`, run the wakeword example using the launch script as follows:
     ```
     sudo python3 launch.py --example wakeword
     ```
-
+    or 
+    ```
+    ./run_wakeword.sh
+    ```
     ![Pi CLI Screenshot 4](./docs/_static/images/pi_cli_screenshot_4.png)
 
 When in pairing mode, you will see a note of your gadget's friendly name (e.g. **GadgetXYZ**) printed to the console. This name is what to look for when going through the following steps to pair your gadget to your Echo device.
@@ -291,13 +294,13 @@ To disconnect your gadget, just terminate the launch script using `CTRL + C`. Th
 
 ### Re-pairing your gadget
 
-To re-pair your gadget with the same or different Echo device, you can put your gadget in pairing mode again by adding the `--pair` argument to the command to run the Python code. For example: `sudo python3 launch.py kitchen_sink --pair`.
+To re-pair your gadget with the same or different Echo device, you can put your gadget in pairing mode again by adding the `--pair` argument to the command to run the Python code. For example: `sudo python3 launch.py wakeword --pair`.
 
 If you are pairing to a previously paired Echo device, please ensure that you first forget the gadget from the Echo device using the instructions in the **Forgetting your gadget from Echo device** section.
 
 ### Unpairing your gadget
 
-When you pair your Pi to an Echo device, the Bluetooth address for the Echo device is stored in a JSON file named `.agt.json` at `/src/`. You can manually clear this Bluetooth address as well as the Bluetooth bond with the Echo device by using the `--clear` argument. For example: `sudo python3 launch.py --example kitchen_sink --clear`.
+When you pair your Pi to an Echo device, the Bluetooth address for the Echo device is stored in a JSON file named `.agt.json` at `/src/`. You can manually clear this Bluetooth address as well as the Bluetooth bond with the Echo device by using the `--clear` argument. For example: `sudo python3 launch.py --example wakeword --clear`.
 
 You are also required to unpair the gadget from your Echo device using the steps listed below.
 
