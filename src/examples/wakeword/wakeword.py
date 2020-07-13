@@ -36,11 +36,11 @@ rejectionList = ["No, I will not listen to you anymore",
 # BOOLEAN constant that determines whether you want a 100% rejection rate or a random chance at rejection
 # True = 100% rejection rate
 # False = REJECT_THRESHOLD rate, by defaul its a 50% rejection rate
-REJECT_COMMAND = False
+REJECT_COMMAND = True
 
 # Affects the chance of the command getting rejected, the higher the number, the more likely the command 
 # is NOT going ot be rejected
-NO_REJECT_THRESHOLD = 80
+NO_REJECT_THRESHOLD = 50
 class WakewordGadget(AlexaGadget):
     """
     An Alexa Gadget that outputs a rejection when detection a wake word is detected
