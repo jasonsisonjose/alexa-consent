@@ -7,8 +7,8 @@ For the rest of this tutorial, I'm going to be referencing the main linux machin
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Creating a Virtual Environment] (#virtual-environment)
-- [Configuration] (#configuration)
+- [Creating a Virtual Environment](#installing-avirtual-environment)
+- [Configuration](#configuration)
 - [Registering a gadget in the AVS Developer Console](#registering-a-gadget-in-the-alexa-voice-service-developer-console)
 - [Projects](#projects)
 - [Running the example projects](#running-the-example-projects)
@@ -99,7 +99,10 @@ To setup your gadget, run the launch script with `--setup` argument, which will 
 ```
 sudo python3 launch.py --setup
 ```
-
+or alternatively
+```
+./setup.sh
+```
 > **Note:** Since the gadget needs a reliable Bluetooth connection with the Echo device, the A2DP Bluetooth profile will be disabled as part of the setup. If you would like to re-enable it please follow the **Troubleshooting guide** below.
 
 If you already have registered your gadget using the **Registering a gadget in the Alexa Voice Service Developer Console** section, you can press `y` and enter your gadget's `Amazon ID` and `Alexa Gadget Secret` so that the setup script automatically configures all the examples with your gadget's credentials.
@@ -174,7 +177,7 @@ and then paste the cookie information to log in to alexa
 
 Each gadget you create, including the examples, requires a configuration file that specifies the `Amazon ID` and `Alexa Gadget Secret` you created in the [Alexa Voice Service Developer Console]("https://developer.amazon.com/avs/home.html#/avs/home"), as well as a specification of the capabilities of your gadget.
 
-In each example, there is a `.ini` file that includes this information. For example, the Kitchen Sink gadget's configuration looks like:
+If you haven't already initialized the AMAZON_ID and AMAZON_GADGET_SECERET via the ```./setup.sh``` or ```sudo python3 launch.py --setup``` commands then, you need to edit the wakeword.ini file directly:
 
 ```
 [GadgetSettings]
@@ -189,7 +192,7 @@ The Wakeword example responds to the Alexa Gadget Toolkit capabilities that are 
 
 The configuration file should either be:
 - placed in the same folder as the python script and should have the same name as the python script;
-for e.g. for the Kitchen Sink example, the name of the configuration file should be same (`wakeword.ini`) as the name of the python script (`wakeword.py`) and both should be placed in the same folder (`alexa-consent/src/examples/wakeword`).
+for e.g. for the Wake word example, the name of the configuration file should be same (`wakeword.ini`) as the name of the python script (`wakeword.py`) and both should be placed in the same folder (`alexa-consent/src/examples/wakeword`).
 
 > **Note:** You do not need to create new credentials for each new gadget you create, especially if you're just experimenting. As you refine your prototype, you may want to make sure that gadget has its own `Amazon ID` and `Alexa Gadget Secret` to avoid conflicts with other gadgets you create.
 
