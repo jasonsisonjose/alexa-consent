@@ -4,17 +4,22 @@
 Create and Utilize an Alexa Gadget using a Raspberry Pi (preferred, can use a linux machine), Python, and the [Alexa Gadgets Toolkit](https://developer.amazon.com/alexa/alexa-gadgets).
 
 For the rest of this tutorial, I'm going to be referencing the main linux machine as a "Raspberry Pi", but just know that it can be replaced with any linux machine
-
+- [Projects](#projects)
 - [Prerequisites](#prerequisites)
+- [Registering a gadget in the AVS Developer Console](#registering-a-gadget-in-the-alexa-voice-service-developer-console)
 - [Installation](#installation)
 - [Creating a Virtual Environment](#installing-a-virtual-environment)
 - [Configuration](#configuration)
-- [Registering a gadget in the AVS Developer Console](#registering-a-gadget-in-the-alexa-voice-service-developer-console)
-- [Projects](#projects)
-- [Running the example projects](#running-the-example-projects)
-- [How does this work?](#how-does-this-work)
 - [Pairing your gadget to an Echo Device](#pairing-your-gadget-to-an-echo-device)
 - [Troubleshooting guide](#troubleshooting-guide)
+- [Running the example projects](#running-the-example-projects)
+- [How does this work?](#how-does-this-work)
+
+
+## Projects
+
+- [Wake Word Gadget](src/examples/wakeword/): Create an Alexa Gadget that runs custom software when the wake word "Alexa" is detected
+
 
 ## Prerequisites
 
@@ -198,63 +203,20 @@ for e.g. for the Wake word example, the name of the configuration file should be
 
 > **Note:** You do not need to create new credentials for each new gadget you create, especially if you're just experimenting. As you refine your prototype, you may want to make sure that gadget has its own `Amazon ID` and `Alexa Gadget Secret` to avoid conflicts with other gadgets you create.
 
-## Projects
-
-- [Wake Word Gadget](src/examples/wakeword/): Create an Alexa Gadget that runs custom software when the wake word "Alexa" is detected
-
-## Running the example projects
-
-To run a gadget example you can use the included launch script with *--example* argument as follows:
-```
-./run_wakeword.sh
-```
-or alternatively you can use
-
-```
-sudo python3 launch.py --example wakeword 
-```
-
-The `example_name` defines the name of the example located in the `/home/pi/alexa-consent/src/examples` folder.
-For the launch script to be able to correctly identify your example using the `example_name`, the names of the example folder and the script (along with its *.ini* [config](#configuration) file) should have the same name.
-
-For e.g. the folder structure for the wakeword example looks as follows:
-```
-...
-|-- examples
-    |-- wakeword
-        |-- wakeword.py
-        |-- wakeword.ini
-        ...
-    ...
-```
-
-## How does this work?
-
-This Python software enables the creation of an Alexa Gadget by handling the connection of the gadget to an Echo device over Classic Bluetooth or Bluetooth Low Energy, and responding to messages based on the Alexa Gadget Toolkit capabilities you specify.
-
-### Callbacks
-
-Each example project leverages callbacks that have been provided for responding to the capabilities that your gadget is configured to respond to.
-
-You can see an example of these callbacks in the wake-word gadget within the `alexa-consent/src/examples/wakeword/wakeword.py` Python file, including:
-
-``` python
-def on_alexa_gadget_statelistener_stateupdate(self, directive):
-    '''
-    CUSTOM CODE, that listens to the "active" status of the alexa echo dot
-    '''
-```
 
 ## Pairing your gadget to an Echo device
 
 In order for a gadget you create to function, it will need to be paired to a [compatible Echo device](https://developer.amazon.com/docs/alexa-gadgets-toolkit/overview-bluetooth-gadgets.html#device-bluetooth-support). When running any example, make sure that the Echo device you want to pair to is nearby, and you have access to the Alexa app. The Echo devices that support gadgets are listed in the [Alexa Gadgets Toolkit documentation](https://developer.amazon.com/docs/alexa-gadgets-toolkit/understand-alexa-gadgets-toolkit.html#devices).
 
-If your gadget has never been paired before or if you switched the transport mode, it will go into pairing mode when you run your gadget's Python code. Following are the steps to pair your gadget using the Kitchen Sink example:
-- On your Pi, inside the `Alexa-Gadgets-Raspberry-Pi-Samples`, run the kitchen sink example using the launch script as follows:
+If your gadget has never been paired before or if you switched the transport mode, it will go into pairing mode when you run your gadget's Python code. Following are the steps to pair your gadget using the Wake Word project example:
+- On your Pi, inside the `alexa-consent`, run the wakeword example using the launch script as follows:
     ```
     sudo python3 launch.py --example wakeword
     ```
-
+    or 
+    ```
+    ./run_wakeword.sh
+    ```
     ![Pi CLI Screenshot 4](./docs/_static/images/pi_cli_screenshot_4.png)
 
 When in pairing mode, you will see a note of your gadget's friendly name (e.g. **GadgetXYZ**) printed to the console. This name is what to look for when going through the following steps to pair your gadget to your Echo device.
@@ -332,13 +294,13 @@ To disconnect your gadget, just terminate the launch script using `CTRL + C`. Th
 
 ### Re-pairing your gadget
 
-To re-pair your gadget with the same or different Echo device, you can put your gadget in pairing mode again by adding the `--pair` argument to the command to run the Python code. For example: `sudo python3 launch.py kitchen_sink --pair`.
+To re-pair your gadget with the same or different Echo device, you can put your gadget in pairing mode again by adding the `--pair` argument to the command to run the Python code. For example: `sudo python3 launch.py wakeword --pair`.
 
 If you are pairing to a previously paired Echo device, please ensure that you first forget the gadget from the Echo device using the instructions in the **Forgetting your gadget from Echo device** section.
 
 ### Unpairing your gadget
 
-When you pair your Pi to an Echo device, the Bluetooth address for the Echo device is stored in a JSON file named `.agt.json` at `/src/`. You can manually clear this Bluetooth address as well as the Bluetooth bond with the Echo device by using the `--clear` argument. For example: `sudo python3 launch.py --example kitchen_sink --clear`.
+When you pair your Pi to an Echo device, the Bluetooth address for the Echo device is stored in a JSON file named `.agt.json` at `/src/`. You can manually clear this Bluetooth address as well as the Bluetooth bond with the Echo device by using the `--clear` argument. For example: `sudo python3 launch.py --example wakeword --clear`.
 
 You are also required to unpair the gadget from your Echo device using the steps listed below.
 
@@ -397,6 +359,50 @@ To switch the transport mode used by your gadget to communicate with the Echo de
     >**Note:** We strongly recommend that the A2DP Bluetooth profile is disabled to ensure stable gadget connectivity with the Echo device. To disable it again run the setup script mentioned in the **Installation** section.
 
 * You can also check out the [list of known issues](https://developer.amazon.com/docs/alexa-gadgets-toolkit/known-issues.html#bluetooth) associated with the Alexa Gadgets Toolkit.
+
+
+## Running the example projects
+
+To run a gadget example you can use the included launch script with *--example* argument as follows:
+```
+./run_wakeword.sh
+```
+or alternatively you can use
+
+```
+sudo python3 launch.py --example wakeword 
+```
+
+The `example_name` defines the name of the example located in the `/home/pi/alexa-consent/src/examples` folder.
+For the launch script to be able to correctly identify your example using the `example_name`, the names of the example folder and the script (along with its *.ini* [config](#configuration) file) should have the same name.
+
+For e.g. the folder structure for the wakeword example looks as follows:
+```
+...
+|-- examples
+    |-- wakeword
+        |-- wakeword.py
+        |-- wakeword.ini
+        ...
+    ...
+```
+
+## How does this work?
+
+This Python software enables the creation of an Alexa Gadget by handling the connection of the gadget to an Echo device over Classic Bluetooth or Bluetooth Low Energy, and responding to messages based on the Alexa Gadget Toolkit capabilities you specify.
+
+### Callbacks
+
+Each example project leverages callbacks that have been provided for responding to the capabilities that your gadget is configured to respond to.
+
+You can see an example of these callbacks in the wake-word gadget within the `alexa-consent/src/examples/wakeword/wakeword.py` Python file, including:
+
+``` python
+def on_alexa_gadget_statelistener_stateupdate(self, directive):
+    '''
+    CUSTOM CODE, that listens to the "active" status of the alexa echo dot
+    '''
+```
 
 
 This is a personal project that is an extension of the Alexa Gadgets Tutorial Sample Projects found on: https://github.com/alexa/Alexa-Gadgets-Raspberry-Pi-Samples
