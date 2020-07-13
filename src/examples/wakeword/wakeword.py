@@ -58,7 +58,7 @@ class WakewordGadget(AlexaGadget):
         for state in directive.payload.states:
             if state.name == 'wakeword':
                 if state.value == 'active':
-                    logger.info('This fool just say "alexa", get this fool: run shell script')
+                    logger.info('This fool just said "alexa"')
                     # PURPOSE: Rejects a command based on chance
                     # If the constant REJECT_COMMAND is True, then there is a 100% chance it will reject the command
                     if REJECT_COMMAND == True:
@@ -67,14 +67,14 @@ class WakewordGadget(AlexaGadget):
                         rejectChance = randint(0,100)
                     print(rejectChance)
 
-                    # If the rejectChance is above 50, then it will reject the command
-                    if rejectChance > REJECT_THRESHOLD:
+                    # If the rejectChance is less than REJECT_THRESHOLD, then it will reject the command
+                    if rejectChance <= REJECT_THRESHOLD:
                         randomIndex = randint(0, (len(rejectionList) - 1))
                         print("random Index: ", randomIndex)
                         print("we on baby: ", rejectionList[randomIndex])
                         self.speakText(rejectionList[randomIndex])
                     # otherwise, it will stay silent and listen for a command
-                    elif rejectChance <= 50:
+                    elif rejectChance > REJECT_THRESHOLD:
                         print("aight I'll listen to you this time")
                         continue
                 elif state.value == 'cleared':
