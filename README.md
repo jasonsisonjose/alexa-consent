@@ -7,7 +7,7 @@ For the rest of this tutorial, I'm going to be referencing the main linux machin
 
 - [Prerequisites](#prerequisites)
 - [Installation](#installation)
-- [Creating a Virtual Environment](#installing-avirtual-environment)
+- [Creating a Virtual Environment](#installing-a-virtual-environment)
 - [Configuration](#configuration)
 - [Registering a gadget in the AVS Developer Console](#registering-a-gadget-in-the-alexa-voice-service-developer-console)
 - [Projects](#projects)
@@ -68,7 +68,9 @@ Download Alexa-Gadgets: Alexa-Consent repo from GitHub:
 
 I have provided scripts for a more convenient setup and running the code. However all of the available commands can be found in the "launch.py" in the main "alexa-consent" folder.
 
-### Installing a Virtual Environment (OPTIONAL, but HIGHLY recommended)
+### Installing a Virtual Environment 
+>(OPTIONAL, but HIGHLY recommended)
+
 I would highly recommend creating a virtual environment because we will be downloading python packages:
 
 ```
