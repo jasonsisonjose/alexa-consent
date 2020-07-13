@@ -36,10 +36,11 @@ rejectionList = ["No, I will not listen to you anymore",
 # BOOLEAN constant that determines whether you want a 100% rejection rate or a random chance at rejection
 # True = 100% rejection rate
 # False = REJECT_THRESHOLD rate, by defaul its a 50% rejection rate
-REJECT_COMMAND = True
+REJECT_COMMAND = False
 
-# Affects the chance of the command getting rejected, the higher the number, the more likely it is to be rejected
-REJECT_THRESHOLD = 50
+# Affects the chance of the command getting rejected, the higher the number, the more likely the command 
+# is NOT going ot be rejected
+NO_REJECT_THRESHOLD = 80
 class WakewordGadget(AlexaGadget):
     """
     An Alexa Gadget that outputs a rejection when detection a wake word is detected
@@ -67,14 +68,14 @@ class WakewordGadget(AlexaGadget):
                         rejectChance = randint(0,100)
                     print(rejectChance)
 
-                    # If the rejectChance is less than REJECT_THRESHOLD, then it will reject the command
-                    if rejectChance <= REJECT_THRESHOLD:
+                    # If the rejectChance is greater than REJECT_THRESHOLD, then it will reject the command
+                    if rejectChance > NO_REJECT_THRESHOLD:
                         randomIndex = randint(0, (len(rejectionList) - 1))
                         print("random Index: ", randomIndex)
                         print("we on baby: ", rejectionList[randomIndex])
                         self.speakText(rejectionList[randomIndex])
                     # otherwise, it will stay silent and listen for a command
-                    elif rejectChance > REJECT_THRESHOLD:
+                    elif rejectChance <= NO_REJECT_THRESHOLD:
                         print("aight I'll listen to you this time")
                         continue
                 elif state.value == 'cleared':
