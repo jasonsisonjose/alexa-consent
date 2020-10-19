@@ -59,7 +59,7 @@ To create a gadget that works with your Echo device, you first need to register 
 
 To learn more, refer to [Register a Gadget](https://developer.amazon.com/docs/alexa-gadgets-toolkit/register-gadget.html) in the Alexa Gadgets Toolkit documentation.
 
-## Installation
+## Installatio
 
 To setup your Raspberry Pi/linux machine as an Alexa Gadget, you will need to download and install some Python and Debian packages. To run the following commands, you will need to be connected to your Pi via SSH or VNC, or be running them directly using a keyboard, mouse, and monitor connected to your Pi. Make sure your Pi is connected to the internet.
 
